@@ -54,7 +54,7 @@ void userRegister() {
         cout << "Enter the Username: ";
         cin >> username;
         vali.length_check(username);
-        if (vali.length_check(username) == 0) {
+        if (!vali.length_check(username)) {
             cout << "The input is too long." << endl;
         } 
         else{
@@ -67,13 +67,15 @@ void userRegister() {
         cout << "Enter the password: ";
         cin >> password;
         vali.length_check(password);
-        if (vali.length_check(password) == 0) {
+        if (!vali.length_check(password)) {
             cout << "The input is too long." << endl;
         }
         else {
             break;
         }
     }
+
+    // ----exited validation-------
     // string fileUsername, filePassword;
     // ifstream fin("users.dat", ios::in);
     // while (fin >> fileUsername >> filePassword) {
