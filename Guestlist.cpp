@@ -17,20 +17,15 @@ validation val;
 public:
 
 guestlist () {
-
 RoomID = 0;
 name = "unknown";
-phone_num = "012345789";
-
+phone_num = "";
 }
 
 guestlist (int RoomID, string name, string phone_num) {
-
   setroom(RoomID);
   setname(name);
   setnum(phone_num);
-
-
 }
 
 void setroom(const int RoomID) {
@@ -41,16 +36,14 @@ void setroom(const int RoomID) {
     throw BadInputException();
   }
 }
+
 int getroom() const {
   return RoomID;
 }
 
 void setname(const string name) {
-
   if (!name.empty() ) {
-
     this->name = name;
-
   }
   else
   {
@@ -63,11 +56,8 @@ string getname() const {
 }
 
 void setnum(const string phone_num) {
-
-  if (!phone_num.empty() ) {
-
+  if (!phone_num.empty()) {
     this->phone_num = phone_num;
-
   }
   else
   {
@@ -82,8 +72,35 @@ string getnum() const {
 
 virtual void output(){
     
-  cout << setw(8) << getroom() << setw(16) << getname() << setw(13) << getnum();
+   cout << setw(8) << getroom() << setw(16) << getname() << setw(13) << getnum();
 }
   
+virtual void input(){
+  int room;
+  string name;
+  string num;
+  validation val;
+
+  room = val.input_room();
+  setroom(room);
+
+  name = val.input_name();
+  setname(name);
+
+  num = val.input_num();
+  setnum(num);
+
+}
 
 };
+
+int main() {
+
+guestlist gu;
+
+  gu.input();
+  gu.output();
+
+  return 0;
+
+}
