@@ -5,7 +5,7 @@
 #include "BadInputException.cpp"
 using namespace std;
 
-class guestlist {
+class Account {
 
 protected:
 
@@ -16,13 +16,13 @@ validation val;
 
 public:
 
-guestlist () {
+Account () {
 RoomID = 0;
 name = "unknown";
 phone_num = "";
 }
 
-guestlist (int RoomID, string name, string phone_num) {
+Account (int RoomID, string name, string phone_num) {
   setroom(RoomID);
   setname(name);
   setnum(phone_num);
@@ -71,8 +71,7 @@ string getnum() const {
 
 
 virtual void output(){
-    
-   cout << setw(8) << getroom() << setw(16) << getname() << setw(13) << getnum();
+   cout << setw(8) << getroom() << setw(16) << getname() << setw(22) << getnum();
 }
   
 virtual void input(){
@@ -93,14 +92,3 @@ virtual void input(){
 }
 
 };
-
-int main() {
-
-guestlist gu;
-
-  gu.input();
-  gu.output();
-
-  return 0;
-
-}

@@ -15,6 +15,7 @@ private:
     return true;
   }
 
+
   bool validate_name(string name) {
     if (name.length() > 10) {
       return false;
@@ -55,7 +56,7 @@ public:
     int room;
       while (true)
       {
-        cout << "Enter RoomID: " << endl;
+        cout << "Enter RoomID: ";
         cin >> room;
         if (!validate_room(room)) {
           cin.clear();
@@ -72,7 +73,7 @@ public:
     string name;
     while (true)
     {
-      cout << "Enter Name: " << endl;
+      cout << "Enter Name: ";
       cin >> name;
       if (!validate_name(name)) {
         cout << "Error: Invalid/max letter reached" << endl;
@@ -86,7 +87,7 @@ public:
   string input_num() {
     string num;
     while (true) {
-      cout << "Enter Phone Number: " << endl;
+      cout << "Enter Phone Number: ";
       cin >> num;
       if (!validate_num(num))
       {
@@ -97,5 +98,23 @@ public:
       }
     }
   }
+
+  int input_day() {
+
+    int day;
+    while (true){
+      cout << "Enter hour check-ins: ";
+      cin >> day;
+      if (!validate_room(day)) {     
+        cin.clear();
+        cin.ignore(200, '\n');
+        cout << "Error: Invalid Input" << endl;
+        }
+      else{
+          return day;
+      }
+    }
+  }
+
 
 };
