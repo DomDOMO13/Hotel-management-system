@@ -46,7 +46,6 @@ bool userLogin() {
     return userFound;
 }
 
-
 void userRegister() {
 
     while (1)
@@ -61,7 +60,6 @@ void userRegister() {
             break;
         }
     }
-    
      while (1)
     {
         cout << "Enter the password: ";
@@ -107,16 +105,4 @@ void userRegister() {
 }
 
 
-};
-
-int main () 
-{
-
-login log;
-
-log.userRegister();
-// log.userLogin();
-
-
-return 0;
 };

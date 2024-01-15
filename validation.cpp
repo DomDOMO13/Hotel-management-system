@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include <string>
 #include "BadInputException.cpp"
@@ -6,6 +7,7 @@ class validation
 private:
   const int maxchar = 12;
   bool boolean;
+
 public:
 
 bool length_check (std::string input) {
