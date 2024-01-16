@@ -12,13 +12,13 @@ using namespace std;
 
 enum {
 
-  FINDNUM , FINDNAME
+  FINDNUM = 1 , FINDNAME
 
 };
 
 enum {
 
-  SORTNUM , SORTNAME
+  SORTNUM = 1 , SORTNAME
 
 };
 
@@ -35,7 +35,7 @@ public:
     }
   }
 
-  void addguest(Account* rAcc){
+  void addguest(Account* account){
     auto receptionistAccount = make_unique<ReceptionistAccount>();  
     receptionistAccount->input();
     Acc.push_back(receptionistAccount.release());
@@ -55,8 +55,9 @@ public:
     cin.get();
   }
 
-  void updateGuestinformation (Account* account, ReceptionistAccount* raccount) {
+  void updateGuestinformation (Account* account) {
     int choice;
+    ReceptionistAccount* raccount;
     cout << "==========FIND MENU==========" << endl;
         cout << "1. Find by RoomID" << endl;
         cout << "2. Find by name" << endl;
@@ -223,7 +224,7 @@ public:
 
   }
 
-  void deleteGuestinformation (Account* account, ReceptionistAccount* raccount) {
+  void deleteGuestinformation (Account* account) {
     int choice;
     cout << "==========FIND MENU==========" << endl;
         cout << "1. Find by RoomID" << endl;
@@ -351,7 +352,7 @@ public:
 
   }
 
-  void searchBankAccount(Account * account){
+  void searchGuestinformation(Account * account){
     int choice;
     cout << "==========FIND MENU==========" << endl;
         cout << "1. Find by account number" << endl;
@@ -430,7 +431,7 @@ public:
     outputFile.close();
   }    
 
-  void loadBankAccount() {
+  void loadGuestinformation() {
     ifstream inputFile("Bank.dat", ios::in | ios::binary);
     if (!inputFile.is_open()) {
         cout << "Error in opening file...\n";
