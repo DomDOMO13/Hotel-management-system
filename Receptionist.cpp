@@ -411,6 +411,23 @@ public:
               break;
         
         }
+  }
+
+  void saveGuestinformation() {
+    ofstream outputFile("Bank.dat", ios::out | ios::binary);
+
+    if (!outputFile.is_open()) {
+        cout << "Error in creating file...\n";
+        exit(1);
+    } else {
+        for (const auto& accountPtr : Acc) {
+            outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
+        }
+
+        cout << "File saved successfully" << endl;
+    }
+
+    outputFile.close();
   }        
 
 };
