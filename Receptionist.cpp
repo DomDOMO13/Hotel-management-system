@@ -42,6 +42,9 @@ public:
   }
 
   void viewguest() {
+    cout << "------------------------------------------------------------------\n";
+    cout << "    Roomid           Name           PhoneNumber              Days \n";
+    cout << "------------------------------------------------------------------\n";
     for (const auto& it : Acc) {
       try {
           it->output();

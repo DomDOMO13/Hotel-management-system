@@ -39,11 +39,8 @@ void input() {
 }
 
 void output() override {
-    cout << "------------------------------------------------------------------\n";
-    cout << "    Roomid           Name           PhoneNumber              Days \n";
-    cout << "------------------------------------------------------------------\n";
     Account::output();
-    cout << setw(18) << getdays() << endl;
+    cout << setw(18) << getdays();
 }
 
 };

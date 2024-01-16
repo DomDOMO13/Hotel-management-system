@@ -47,7 +47,7 @@ Account* account{};
     int getChoice() {
         int choice;
 
-        cout << "Enter your choice(1-10)-> ";
+        cout << "Enter your choice: ";
         cin >> choice;
         return choice;
 
