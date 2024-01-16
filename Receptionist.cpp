@@ -299,10 +299,57 @@ public:
           cin.get();
           break;
         }
+  }
 
+  void DotDotDot() {
+    for (int i = 0; i < 5; i++) {
+        cout << ".";
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(500));
+    }
+  }
 
+  void sortGuestinformation() {
 
-
+    int choice;
+        cout << "==========EDIT METHOD==========" << endl;
+        cout << "1. Sort by Ascending" << endl;
+        cout << "2. Sort by Descending" << endl;
+        cout << "3. Back to main menu" << endl;
+        cout << "Enter choice(1-3) -> ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+          sort(Acc.begin(), Acc.end(), [](const Account* a, const Account* b) {
+            return a->getnum() < b->getnum();                
+          });    
+          cout << "Sorting";
+          DotDotDot();
+          cout << "Sorted successfully" << endl;
+          cout << "Press any key to continue..." << endl;
+          cin.ignore();
+          cin.get(); 
+          break;
+        case 2:
+          sort(Acc.begin(), Acc.end(), [](const Account* a, const Account* b) {
+          return a->getnum() > b->getnum();
+        });
+          cout << "Sorting";
+          DotDotDot();
+          cout << "Sorted successfully" << endl;
+          cout << "Press any key to continue..." << endl;
+          cin.ignore();
+          cin.get();  
+        break;
+        default:
+        cout << "Invalid choice." << endl;
+        cout << "Press any key to continue..." << endl;
+        cin.ignore();
+        cin.get();      
+        break;
+        }
 
   }
+
 };
