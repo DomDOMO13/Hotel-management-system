@@ -428,6 +428,28 @@ public:
     }
 
     outputFile.close();
-  }        
+  }    
+
+  void loadBankAccount() {
+    ifstream inputFile("Bank.dat", ios::in | ios::binary);
+    if (!inputFile.is_open()) {
+        cout << "Error in opening file...\n";
+        exit(1);
+    }
+    try {
+        while (true) {
+          Account* account = new Account();
+          if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
+              delete account;
+              break;
+          }
+          addguest(account);
+          cout << "File loaded successfully" << endl;
+        }
+    } catch (const std::exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+      }
+    inputFile.close();
+}    
 
 };
