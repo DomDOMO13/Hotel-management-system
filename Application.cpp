@@ -24,20 +24,20 @@ class Application {
 Receptionist re;
 Account* account{};
 
-    void bankMenu() {
-        cout << "==========Bank Management Menu==========" << endl;
-        cout << "1. Create bank account" << endl;
-        cout << "2. View all bank account" << endl;
-        cout << "3. Update a specific bank account" << endl;
-        cout << "4. Delete a specific bank account" << endl;
-        cout << "5. Sort bank account" << endl;
-        cout << "6. Search for a specific bank account" << endl;
-        cout << "7. Save bank data" << endl;
+    void HotelMenu() {
+        cout << "==========Hotel Management Menu==========" << endl;
+        cout << "1. Add Guest information" << endl;
+        cout << "2. View Guest information" << endl;
+        cout << "3. Update a specific Guest information" << endl;
+        cout << "4. Delete a specific Guest information" << endl;
+        cout << "5. Sort Guest information" << endl;
+        cout << "6. Search for a specific Guest information" << endl;
+        cout << "7. Save guest data" << endl;
         cout << "8. Log out" << endl;
     }
 
     void authenticationMenu(){
-        cout <<"==========Bank Management System==========" << endl;
+        cout <<"==========Hotel Management System==========" << endl;
         cout << "1. Login" << endl;
         cout << "2. Register" << endl;
         cout << "3. Exit" << endl;
@@ -58,12 +58,12 @@ Account* account{};
 
  void HotelManagement(){
     
-        int choice = 0;
+    int choice = 0;
     int option = 0;
 
    
     do {
-        bankMenu();
+        HotelMenu();
         choice = getChoice();
 
         switch (choice) {
@@ -121,7 +121,7 @@ Account* account{};
       case 1:
         if(log.userLogin()==true){
           system("cls");
-          re.loadGuestinformation();
+          //re.loadGuestinformation();
           HotelManagement();
         }else{
           cout << "Login failed. Please try again." << endl;
