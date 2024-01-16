@@ -239,7 +239,6 @@ public:
             cout << "Enter account number: ";
             cin >> RoomNumber;
             auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
-
             if(it != Acc.end()){
             cout << "Account information to be deleted:\n";
             account->output();
@@ -250,10 +249,8 @@ public:
               auto iter = find(Acc.begin(), Acc.end(), account);
               Acc.erase(iter);
               cout << "Account deleted successfully.\n";
-
             } else {
               cout << "Deletion canceled.\n";
-
             }
             } else {
               cout << "Bank info not found" << endl;
@@ -261,10 +258,51 @@ public:
               cin.ignore();
               cin.get();
             }
-
-                
           }
           break;
+
+          case FINDNAME: {
+            char performChoice;
+            string name;
+            cout << "Enter account number: ";
+            cin >> name;
+            auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
+            if(it != Acc.end()){
+            cout << "Account information to be deleted:\n";
+            account->output();
+            cout << "Do you want to delete this account? (y/n): ";
+            char choice;
+            cin >> choice;
+            if (choice == 'y' || choice == 'Y') {
+              auto iter = find(Acc.begin(), Acc.end(), account);
+              Acc.erase(iter);
+              cout << "Account deleted successfully.\n";
+            } else {
+              cout << "Deletion canceled.\n";
+            }
+            } else {
+              cout << "Bank info not found" << endl;
+              cout << "Press any key to continue..." << endl;
+              cin.ignore();
+              cin.get();
+            }
+          }
+          break;
+
+          case 3:
+          break;
+
+          default:
+          cout << "Invalid choice." << endl;
+          cout << "Press any key to continue...";
+          cin.ignore();
+          cin.get();
+          break;
         }
+
+
+
+
+
   }
 };
