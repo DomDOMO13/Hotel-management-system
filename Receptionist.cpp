@@ -35,6 +35,14 @@ public:
     }
   }
 
+  void output_title() {
+
+    cout << "------------------------------------------------------------------\n";
+    cout << "    Roomid           Name           PhoneNumber              Days \n";
+    cout << "------------------------------------------------------------------\n";
+
+  }
+
   void addguest(Account* account){
     auto receptionistAccount = make_unique<ReceptionistAccount>();  
     receptionistAccount->input();
@@ -42,9 +50,7 @@ public:
   }
 
   void viewguest() {
-    cout << "------------------------------------------------------------------\n";
-    cout << "    Roomid           Name           PhoneNumber              Days \n";
-    cout << "------------------------------------------------------------------\n";
+    output_title();
     for (const auto& it : Acc) {
       try {
           it->output();
@@ -60,9 +66,9 @@ public:
 
   void updateGuestinformation (Account* account) {
     int choice;
-    ReceptionistAccount* raccount;
+
     cout << "==========FIND MENU==========" << endl;
-        cout << "1. Find by RoomID" << endl;
+        cout << "1. Find by roomid" << endl;
         cout << "2. Find by name" << endl;
         cout << "3. Back to main menu" << endl;
         cout << "Enter choice(1-3)-> ";
@@ -72,56 +78,60 @@ public:
           case FINDNUM: {
             char performChoice;
             int RoomNumber;
-            cout << "Enter account number: ";
+            cout << "Enter Roomid: ";
             cin >> RoomNumber;
-            auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
+            auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](Account* account) { return account->getroom() == RoomNumber; });
             do{
                   if(it != Acc.end()){
                   int choice;
                   cout << "==========EDIT MENU==========" << endl;
-                  cout << "1.	Account number" << endl;
+                  cout << "1.	Roomid" << endl;
                   cout << "2.	Name" << endl;
-                  cout << "3.	PhoneNumber" << endl;
-                  cout << "4.	Days" << endl;
+                  cout << "3.	Phone number" << endl;
+                  cout << "4.	Hours" << endl;
                   cout << "5. Back" << endl;
                   cout << "Enter choice(1-5)-> ";
                   cin >> choice;
                   switch (choice)
                   {
                     case 1:{
-                    int new_room;                    
-                    cout << "Enter new account number: ";
-                    cin >> new_room;
-                    account->setroom(new_room);
-                    cout << "Account number changed successfully" << endl;
+                      int new_room;
+                      cout << "Enter new roomid: ";
+                      cin >> new_room;
+  
+                      Account* target = (*it);
+                      target->setroom(new_room);
 
+                      cout << "Roomid changed successfully" << endl;
                     }
                     break;
 
                     case 2:{
-                        string new_name;                    
-                        cout << "Enter new name: ";
-                        cin >> new_name;    
-                      account->setname(new_name);
+                      string new_name;
+                      cout << "Enter new name: ";
+                      cin >> new_name;
+                      Account* target = (*it);
+                      target->setname(new_name);
                       cout << "Name changed successfully" << endl;
                     }
                     break;
 
                     case 3:{
-                      string new_num;                    
+                      string new_num;
                       cout << "Enter new PhoneNumber: ";
-                      cin >> new_num;    
-                      account->setnum(new_num);
-                      cout << "Name changed successfully" << endl;
+                      cin >> new_num;
+                      Account* target = (*it);
+                      target->setnum(new_num);
+                      cout << "Phone number changed successfully" << endl;
                     }
                     break;
 
                     case 4:{
-                      int new_days;                    
-                      cout << "Enter new name: ";
-                      cin >> new_days;    
-                      raccount->setdays(new_days);
-                      cout << "Name changed successfully" << endl;
+                      int new_days;
+                      cout << "Enter new hours check in: ";
+                      cin >> new_days;
+                      dynamic_cast<ReceptionistAccount*>(*it)->setdays(new_days);
+                      cout << "Hours changed successfully" << endl;
                     }
                     break;
 
@@ -133,7 +143,7 @@ public:
                       break;
                   }
                   }else {
-                      cout << "Account not found" << endl;
+                      cout << "Guest not found" << endl;
                       cout << "Do you want to continue? (y/n) -> ";
                       cin >> performChoice; 
                     }
@@ -144,18 +154,19 @@ public:
 
             case FINDNAME: {
               char performChoice;
-              int RoomNumber;
-              cout << "Enter account number: ";
-              cin >> RoomNumber;
-              auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
+              string name;
+              cout << "Enter name: ";
+              cin >> name;
+              auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
               do{
                     if(it != Acc.end()){
                     int choice;
+                    Account* target = (*it);
                     cout << "==========EDIT MENU==========" << endl;
-                    cout << "1.	Account number" << endl;
+                    cout << "1.	Roomid" << endl;
                     cout << "2.	Name" << endl;
-                    cout << "3.	PhoneNumber" << endl;
-                    cout << "4.	Days" << endl;
+                    cout << "3.	Phone number" << endl;
+                    cout << "4.	Hours" << endl;
                     cout << "5. Back" << endl;
                     cout << "Enter choice(1-5)-> ";
                     cin >> choice;
@@ -163,10 +174,10 @@ public:
                     {
                       case 1:{
                       int new_room;                    
-                      cout << "Enter new account number: ";
+                      cout << "Enter new Roomid: ";
                       cin >> new_room;
-                      account->setroom(new_room);
-                      cout << "Account number changed successfully" << endl;
+                      target->setroom(new_room);
+                      cout << "Roomid changed successfully" << endl;
 
                       }
                       break;
@@ -175,26 +186,26 @@ public:
                           string new_name;                    
                           cout << "Enter new name: ";
                           cin >> new_name;    
-                        account->setname(new_name);
+                        target->setname(new_name);
                         cout << "Name changed successfully" << endl;
                       }
                       break;
 
                       case 3:{
                         string new_num;                    
-                        cout << "Enter new PhoneNumber: ";
+                        cout << "Enter new Phone number: ";
                         cin >> new_num;    
-                        account->setnum(new_num);
-                        cout << "Name changed successfully" << endl;
+                        target->setnum(new_num);
+                        cout << "Phone number changed successfully" << endl;
                       }
                       break;
 
                       case 4:{
                         int new_days;                    
-                        cout << "Enter new name: ";
+                        cout << "Enter new hours check in: ";
                         cin >> new_days;    
-                        raccount->setdays(new_days);
-                        cout << "Name changed successfully" << endl;
+                        dynamic_cast<ReceptionistAccount*>(*it)->setdays(new_days);
+                        cout << "hours changed successfully" << endl;
                       }
                       break;
 
@@ -206,7 +217,7 @@ public:
                         break;
                     }
                     }else {
-                        cout << "Account not found" << endl;
+                        cout << "Guest not found" << endl;
                         cout << "Do you want to continue? (y/n) -> ";
                         cin >> performChoice; 
                     }
@@ -244,8 +255,8 @@ public:
             if(it != Acc.end()){
             cout << "Account information to be deleted:\n";
             account->output();
-            cout << "Do you want to delete this account? (y/n): ";
             char choice;
+            cout << "Do you want to delete this account? (y/n): ";
             cin >> choice;
             if (choice == 'y' || choice == 'Y') {
               auto iter = find(Acc.begin(), Acc.end(), account);
@@ -255,7 +266,7 @@ public:
               cout << "Deletion canceled.\n";
             }
             } else {
-              cout << "Bank info not found" << endl;
+              cout << "Guest info not found" << endl;
               cout << "Press any key to continue..." << endl;
               cin.ignore();
               cin.get();
@@ -283,7 +294,7 @@ public:
               cout << "Deletion canceled.\n";
             }
             } else {
-              cout << "Bank info not found" << endl;
+              cout << "Guest info not found" << endl;
               cout << "Press any key to continue..." << endl;
               cin.ignore();
               cin.get();
@@ -353,30 +364,31 @@ public:
 
   }
 
-  void searchGuestinformation(Account * account){
+  void searchGuestinformation(Account* account){
     int choice;
     cout << "==========FIND MENU==========" << endl;
-        cout << "1. Find by account number" << endl;
+        cout << "1. Find by roomid" << endl;
         cout << "2. Find by name" << endl;
         cout << "3. Back to main menu" << endl;
         cout << "Enter choice(1-3)-> ";
-        cin>> choice;;
+        cin>> choice;
         switch (choice)
         {
         case FINDNUM:{
             int roomNumber;
-            cout << "Enter account number: ";
+            cout << "Enter Roomid: ";
             cin >> roomNumber;
-            auto it = find_if(Acc.begin(),Acc.end(),
-            [roomNumber](const Account* account) { return account->getroom() == roomNumber; });
+            auto it = find_if(Acc.begin(),Acc.end(),[roomNumber](const Account* account) { return account->getroom() == roomNumber; });
             if(it != Acc.end()){
-             cout << "Account found:\n";
-                account->output();
+              cout << "Roomid found:" << endl;
+              output_title();
+              Account* target = (*it);
+              target->output();
               cout <<  "Press any key to continue...";
               cin.ignore();
               cin.get();
             }else {
-                cout << "Bank info not found" << endl;
+                cout << "Guest info not found" << endl;
                 cout << "Press any key to continue..." << endl;
                 cin.ignore();
                 cin.get();
@@ -388,16 +400,17 @@ public:
             string name;
             cout << "Enter name: ";
             cin >> name;
-            auto it = find_if(Acc.begin(),Acc.end(),
-            [name](const Account* account) { return account->getname() == name; });
+            auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
             if(it != Acc.end()){
-              cout << "Account found:\n";
-              account->output();
+              cout << "Name found:" << endl;
+              output_title();
+              Account* target = (*it);
+              target->output();
               cout << "Press any key to continue...";
               cin.ignore();
               cin.get();
             }else {
-              cout << "Bank info not found" << endl;
+              cout << "Guest info not found" << endl;
               cout << "Press any key to continue..." << endl;
               cin.ignore();
               cin.get();
@@ -415,43 +428,45 @@ public:
         }
   }
 
-  void saveGuestinformation() {
-    ofstream outputFile("Bank.dat", ios::out | ios::binary);
+// Cant implement the code yet
 
-    if (!outputFile.is_open()) {
-        cout << "Error in creating file...\n";
-        exit(1);
-    } else {
-        for (const auto& accountPtr : Acc) {
-            outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
-        }
+//   void saveGuestinformation() {
+//     ofstream outputFile("Bank.dat", ios::out | ios::binary);
 
-        cout << "File saved successfully" << endl;
-    }
+//     if (!outputFile.is_open()) {
+//         cout << "Error in creating file...\n";
+//         exit(1);
+//     } else {
+//         for (const auto& accountPtr : Acc) {
+//             outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
+//         }
 
-    outputFile.close();
-  }    
+//         cout << "File saved successfully" << endl;
+//     }
 
-  void loadGuestinformation() {
-    ifstream inputFile("Bank.dat", ios::in | ios::binary);
-    if (!inputFile.is_open()) {
-        cout << "Error in opening file...\n";
-        exit(1);
-    }
-    try {
-        while (true) {
-          Account* account = new Account();
-          if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
-              delete account;
-              break;
-          }
-          addguest(account);
-          cout << "File loaded successfully" << endl;
-        }
-    } catch (const std::exception& e) {
-        cerr << "Exception: " << e.what() << endl;
-      }
-    inputFile.close();
-}    
+//     outputFile.close();
+//   }    
+
+//   void loadGuestinformation() {
+//     ifstream inputFile("Bank.dat", ios::in | ios::binary);
+//     if (!inputFile.is_open()) {
+//         cout << "Error in opening file...\n";
+//         exit(1);
+//     }
+//     try {
+//         while (true) {
+//           Account* account = new Account();
+//           if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
+//               delete account;
+//               break;
+//           }
+//           // addguest(account);
+//           cout << "File loaded successfully" << endl;
+//         }
+//     } catch (const std::exception& e) {
+//         cerr << "Exception: " << e.what() << endl;
+//       }
+//     inputFile.close();
+// }    
 
 };

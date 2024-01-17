@@ -12,8 +12,8 @@ enum {
     DELETEGUEST,
     SORTGUEST,
     SEARCHGUEST,
-    SAVEGUEST,
-    LOADGUEST,
+    // SAVEGUEST,
+    // LOADGUEST,
     LOGOUT
 
 };
@@ -32,8 +32,8 @@ Account* account{};
         cout << "4. Delete a specific Guest information" << endl;
         cout << "5. Sort Guest information" << endl;
         cout << "6. Search for a specific Guest information" << endl;
-        cout << "7. Save guest data" << endl;
-        cout << "8. Log out" << endl;
+        // cout << "7. Save guest data" << endl;
+        cout << "7. Log out" << endl;
     }
 
     void authenticationMenu(){
@@ -93,16 +93,16 @@ Account* account{};
                 re.searchGuestinformation(account);
                 break;
 
-            case SAVEGUEST:
-                re.saveGuestinformation();
-                break;
+            // case SAVEGUEST:
+            //     re.saveGuestinformation();
+            //     break;
             case LOGOUT:
                 break;
 
             default:
                 cout << "Invalid Choice, Try again" << endl;
                 break;
-            }    
+            }
         
         }while (choice != 8);
  }
@@ -121,7 +121,7 @@ Account* account{};
       case 1:
         if(log.userLogin()==true){
           system("cls");
-          //re.loadGuestinformation();
+        //   re.loadGuestinformation();
           HotelManagement();
         }else{
           cout << "Login failed. Please try again." << endl;

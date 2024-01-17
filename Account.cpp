@@ -42,7 +42,7 @@ int getroom() const {
 }
 
 void setname(const string name) {
-  if (!name.empty() ) {
+  if (!name.empty()) {
     this->name = name;
   }
   else

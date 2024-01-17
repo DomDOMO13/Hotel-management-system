@@ -18,7 +18,7 @@ ReceptionistAccount(int RoomID, string name, string phone_num, int Days) : Accou
   setdays(Days);
 }
 
-void setdays(const int Days) {
+void setdays(int Days) {
   if(Days > 0) {
     this-> Days = Days;
   }
@@ -40,7 +40,7 @@ void input() {
 
 void output() override {
     Account::output();
-    cout << setw(18) << getdays();
+    cout << setw(18) << getdays() << endl;
 }
 
 };
