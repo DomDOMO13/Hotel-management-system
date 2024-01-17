@@ -144,8 +144,9 @@ public:
                   }
                   }else {
                       cout << "Guest not found" << endl;
-                      cout << "Do you want to continue? (y/n) -> ";
-                      cin >> performChoice; 
+                      cout << "Press any key to continue...";
+                      cin.ignore();
+                      cin.get();
                     }
               }while(performChoice == 'y' || performChoice == 'Y');
               
@@ -218,8 +219,9 @@ public:
                     }
                     }else {
                         cout << "Guest not found" << endl;
-                        cout << "Do you want to continue? (y/n) -> ";
-                        cin >> performChoice; 
+                        cout << "Press any key to continue...";
+                        cin.ignore();
+                        cin.get();
                     }
                 }while(performChoice == 'y' || performChoice == 'Y');
                 
@@ -254,13 +256,14 @@ public:
             auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
             if(it != Acc.end()){
             cout << "Account information to be deleted:\n";
-            account->output();
+            Account* target = (*it);
+            output_title();
+            target->output();
             char choice;
             cout << "Do you want to delete this account? (y/n): ";
             cin >> choice;
             if (choice == 'y' || choice == 'Y') {
-              auto iter = find(Acc.begin(), Acc.end(), account);
-              Acc.erase(iter);
+              Acc.erase(it);
               cout << "Account deleted successfully.\n";
             } else {
               cout << "Deletion canceled.\n";
@@ -282,13 +285,14 @@ public:
             auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
             if(it != Acc.end()){
             cout << "Account information to be deleted:\n";
-            account->output();
+            Account* target = (*it);
+            output_title();
+            target->output();
             cout << "Do you want to delete this account? (y/n): ";
             char choice;
             cin >> choice;
             if (choice == 'y' || choice == 'Y') {
-              auto iter = find(Acc.begin(), Acc.end(), account);
-              Acc.erase(iter);
+              Acc.erase(it);
               cout << "Account deleted successfully.\n";
             } else {
               cout << "Deletion canceled.\n";
