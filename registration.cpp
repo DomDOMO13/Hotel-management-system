@@ -24,7 +24,7 @@ bool userLogin() {
     cin >> password;
 
     bool userFound = false;
-    ifstream fin("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\users.dat", ios::in);
+    ifstream fin("users.dat", ios::in);
 
     if (!fin.is_open()) {
         cerr << "Cannot open file" << endl;
@@ -80,7 +80,7 @@ void userRegister() {
     // while (fin >> fileUsername >> filePassword) {
     //         if (fileUsername == username) {
     //                 // system("cls");
-    //                 cout << "This shit already exist" << endl;
+    //                 cout << "This already exist" << endl;
     //                 userRegister();
     //             }
     //         else {

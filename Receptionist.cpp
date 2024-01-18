@@ -38,8 +38,33 @@ public:
   void output_title() {
 
     cout << "------------------------------------------------------------------\n";
-    cout << "    Roomid           Name           PhoneNumber              Days \n";
+    cout << "    Roomid           Name           PhoneNumber              Hour \n";
     cout << "------------------------------------------------------------------\n";
+
+  }
+
+  int getChoice() {
+        
+    int choice;
+    bool valid= false;
+
+    do
+      {
+        cout << "Enter a number: " << flush;
+        cin >> choice;
+        if (cin.good())
+        {
+            valid = true;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input! please re-enter." << endl;
+        }
+    } while (!valid);
+    
+    return choice;
 
   }
 
@@ -71,8 +96,7 @@ public:
         cout << "1. Find by roomid" << endl;
         cout << "2. Find by name" << endl;
         cout << "3. Back to main menu" << endl;
-        cout << "Enter choice(1-3)-> ";
-        cin>> choice;
+        choice = getChoice();
         switch (choice)
         {
           case FINDNUM: {
@@ -90,8 +114,7 @@ public:
                   cout << "3.	Phone number" << endl;
                   cout << "4.	Hours" << endl;
                   cout << "5. Back" << endl;
-                  cout << "Enter choice(1-5)-> ";
-                  cin >> choice;
+                  choice = getChoice();
                   switch (choice)
                   {
                     case 1:{
@@ -169,8 +192,7 @@ public:
                     cout << "3.	Phone number" << endl;
                     cout << "4.	Hours" << endl;
                     cout << "5. Back" << endl;
-                    cout << "Enter choice(1-5)-> ";
-                    cin >> choice;
+                    choice = getChoice();
                     switch (choice)
                     {
                       case 1:{
@@ -228,6 +250,9 @@ public:
             }
             break;
 
+          case 3:
+          break;
+
           default:
           cout << "Invalid choice." << endl;
           cout << "Press any key to continue...";
@@ -244,27 +269,26 @@ public:
         cout << "1. Find by RoomID" << endl;
         cout << "2. Find by name" << endl;
         cout << "3. Back to main menu" << endl;
-        cout << "Enter choice(1-3)-> ";
-        cin>> choice;
+        choice = getChoice();
         switch (choice)
         {
           case FINDNUM: {
             char performChoice;
             int RoomNumber;
-            cout << "Enter account number: ";
+            cout << "Enter Roomid: ";
             cin >> RoomNumber;
             auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
             if(it != Acc.end()){
-            cout << "Account information to be deleted:\n";
+            cout << "Guest information to be deleted:\n";
             Account* target = (*it);
             output_title();
             target->output();
             char choice;
-            cout << "Do you want to delete this account? (y/n): ";
+            cout << "Do you want to delete this information? (y/n): ";
             cin >> choice;
             if (choice == 'y' || choice == 'Y') {
               Acc.erase(it);
-              cout << "Account deleted successfully.\n";
+              cout << "Guest information deleted successfully.\n";
             } else {
               cout << "Deletion canceled.\n";
             }
@@ -280,26 +304,26 @@ public:
           case FINDNAME: {
             char performChoice;
             string name;
-            cout << "Enter account number: ";
+            cout << "Enter name: ";
             cin >> name;
             auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
             if(it != Acc.end()){
-            cout << "Account information to be deleted:\n";
+            cout << "Guest information to be deleted:\n";
             Account* target = (*it);
             output_title();
             target->output();
-            cout << "Do you want to delete this account? (y/n): ";
+            cout << "Do you want to delete this information? (y/n): ";
             char choice;
             cin >> choice;
             if (choice == 'y' || choice == 'Y') {
               Acc.erase(it);
-              cout << "Account deleted successfully.\n";
+              cout << "Guest information deleted successfully.\n";
             } else {
               cout << "Deletion canceled.\n";
             }
             } else {
               cout << "Guest info not found" << endl;
-              cout << "Press any key to continue..." << endl;
+              cout << "Press any key to retry..." << endl;
               cin.ignore();
               cin.get();
             }
@@ -311,10 +335,10 @@ public:
 
           default:
           cout << "Invalid choice." << endl;
-          cout << "Press any key to continue...";
+          cout << "Press any key to retry...";
           cin.ignore();
           cin.get();
-          break;
+          deleteGuestinformation(account);
         }
   }
 
@@ -332,8 +356,7 @@ public:
         cout << "1. Sort by Ascending" << endl;
         cout << "2. Sort by Descending" << endl;
         cout << "3. Back to main menu" << endl;
-        cout << "Enter choice(1-3) -> ";
-        cin >> choice;
+        choice = getChoice();
         switch (choice)
         {
         case 1:
@@ -358,6 +381,10 @@ public:
           cin.ignore();
           cin.get();  
         break;
+
+        case 3:
+        break;
+
         default:
         cout << "Invalid choice." << endl;
         cout << "Press any key to continue..." << endl;
@@ -370,12 +397,11 @@ public:
 
   void searchGuestinformation(Account* account){
     int choice;
-    cout << "==========FIND MENU==========" << endl;
+        cout << "==========FIND MENU==========" << endl;
         cout << "1. Find by roomid" << endl;
         cout << "2. Find by name" << endl;
         cout << "3. Back to main menu" << endl;
-        cout << "Enter choice(1-3)-> ";
-        cin>> choice;
+        choice = getChoice();
         switch (choice)
         {
         case FINDNUM:{
@@ -422,12 +448,15 @@ public:
         }
         break;
 
+        case 3:
+        break;
+
         default:
           cout << "Invalid choice." << endl;
           cout << "Press any key to continue..." << endl;
           cin.ignore();
           cin.get();
-              break;
+          break;
         
         }
   }
@@ -435,7 +464,7 @@ public:
 // Cant implement the code yet
 
 //   void saveGuestinformation() {
-//     ofstream outputFile("Bank.dat", ios::out | ios::binary);
+//     ofstream outputFile("Guest.dat", ios::out | ios::binary);
 
 //     if (!outputFile.is_open()) {
 //         cout << "Error in creating file...\n";
@@ -452,7 +481,7 @@ public:
 //   }    
 
 //   void loadGuestinformation() {
-//     ifstream inputFile("Bank.dat", ios::in | ios::binary);
+//     ifstream inputFile("Guest.dat", ios::in | ios::binary);
 //     if (!inputFile.is_open()) {
 //         cout << "Error in opening file...\n";
 //         exit(1);

@@ -45,11 +45,27 @@ Account* account{};
 
 
     int getChoice() {
-        int choice;
+        
+    int choice;
+    bool valid= false;
 
-        cout << "Enter your choice: ";
+    do
+        {
+        cout << "Enter a number: " << flush;
         cin >> choice;
-        return choice;
+        if (cin.good())
+        {
+            valid = true;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input! please re-enter." << endl;
+        }
+    } while (!valid);
+    
+    return choice;
 
     }
 
@@ -104,7 +120,7 @@ Account* account{};
                 break;
             }
         
-        }while (choice != 8);
+        }while (choice != 7);
  }
 
     void run() {
