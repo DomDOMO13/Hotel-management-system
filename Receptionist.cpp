@@ -150,6 +150,16 @@ public:
               {
                 cout << "Guest not found" << endl;
               }
+
+              if (Acc.empty())
+              {
+                cout << "There nothing to update" << endl;
+                cout << "Press Enter to Continue...";
+                cin.ignore();
+                cin.get();
+                break;
+              }
+
               cout << "Do you want to continue (Y/N)? ";
               cin >> ans;
             } while ((ans == 'Y') || (ans == 'y'));
@@ -228,9 +238,19 @@ public:
                   break;
                 }
               }
+
               else
               {
                 cout << "Guest not found" << endl;
+              }
+
+              if (Acc.empty())
+              {
+                cout << "There nothing to update" << endl;
+                cout << "Press Enter to Continue...";
+                cin.ignore();
+                cin.get();
+                break;
               }
               
               cout << "Do you want to continue (Y/N)? ";
@@ -286,7 +306,17 @@ public:
               }
               } else {
                 cout << "Guest info not found" << endl;
-              }  
+              }
+
+              if (Acc.empty()) {
+
+                cout << "There nothing to delete" << endl;
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+                break;
+
+              }
 
               cout << "Do you want to continue (Y/N)? ";
               cin >> ans;
@@ -312,16 +342,25 @@ public:
               cout << "Do you want to delete this information? (y/n): ";
               char choice;
               cin >> choice;
-              if (choice == 'y' || choice == 'Y') {
-                Acc.erase(it);
-                cout << "Guest information deleted successfully.\n";
-              } else {
-                cout << "Deletion canceled.\n";
-              }
+                if (choice == 'y' || choice == 'Y') {
+                  Acc.erase(it);
+                  cout << "Guest information deleted successfully.\n";
+                } else {
+                  cout << "Deletion canceled.\n";
+                }
               } else {
                 cout << "Guest info not found" << endl;
               }
-              
+
+              if (Acc.empty())
+              {
+                cout << "There nothing to delete" << endl;
+                cout << "Press Enter to continue...";
+                cin.ignore();
+                cin.get();
+                break;
+              }
+
                 cout << "Do you want to continue (Y/N)? ";
                 cin >> ans;
 
@@ -425,6 +464,15 @@ public:
               cout << "Guest info not found" << endl;
             }
 
+            if (Acc.empty())
+              {
+                cout << "There nothing to search" << endl;
+                cout << "Press Enter to Continue...";
+                cin.ignore();
+                cin.get();
+                break;
+              }
+
             cout << "Do you want to continue (Y/N)? ";
             cin >> ans;
 
@@ -452,6 +500,15 @@ public:
             {
               cout << "Guest info not found" << endl;
             }
+
+            if (Acc.empty())
+              {
+                cout << "There nothing to search" << endl;
+                cout << "Press Enter to Continue...";
+                cin.ignore();
+                cin.get();
+                break;
+              }
 
             cout << "Do you want to continue (Y/N)? ";
             cin >> ans;
