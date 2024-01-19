@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "Application.cpp"
 #include "Receptionist.cpp"
 #include "Account.cpp"

@@ -29,7 +29,6 @@ private:
   }
 
   bool validate_num(string num) {
-
     if (num.length() > 10) {
       return false;
     }
@@ -41,6 +40,7 @@ public:
   bool length_check (std::string input) {
     return boolean = input.length() < maxchar;
   };
+
   void setlength_check(const bool boolean) {
       if(boolean != 1 || boolean != 0){
           this->boolean = boolean;
@@ -48,6 +48,7 @@ public:
           throw BadInputException();
       }
   }
+  
   bool getlength_check() const {
     return boolean;
   }
@@ -91,7 +92,7 @@ public:
       cin >> num;
       if (!validate_num(num))
       {
-        cout << "Error Invalid Input" << endl;
+        cout << "Error: Invalid Input" << endl;
       }
       else {
         return num;
@@ -116,5 +117,47 @@ public:
     }
   }
 
+  int room_input_validation() {
+    int RoomNumber;
+    bool valid = false;
+    do
+    {
+      cout << "Enter a Roomid: " << flush;
+      cin >> RoomNumber;
+      if (cin.good())
+      {
+        valid = true;
+      }
+      else
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input! please re-enter." << endl;
+      }
+    } while (!valid);
+    return RoomNumber;
+  }
+
+  int getChoice()
+  {
+    int choice;
+    bool valid = false;
+    do
+    {
+      cout << "Enter a number: " << flush;
+      cin >> choice;
+      if (cin.good())
+      {
+        valid = true;
+      }
+      else
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input! please re-enter." << endl;
+      }
+    } while (!valid);
+    return choice;
+  }
 
 };

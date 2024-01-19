@@ -76,7 +76,6 @@ Account* account{};
     
     int choice = 0;
     int option = 0;
-
    
     do {
         HotelMenu();
@@ -127,7 +126,6 @@ Account* account{};
      int choice = 0;
      login log;
 
-
      do {
      
       authenticationMenu();
@@ -154,14 +152,7 @@ Account* account{};
         break;
       }
 
-
      }while(choice != 0);
     }
-
-
-
-
-
-
 
 };
