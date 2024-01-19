@@ -71,7 +71,7 @@ string getnum() const {
 
 
 virtual void output(){
-   cout << setw(8) << getroom() << setw(16) << getname() << setw(22) << getnum();
+   cout << setw(8) << getroom() << setw(17) << getname() << setw(22) << getnum();
 }
   
 virtual void input(){

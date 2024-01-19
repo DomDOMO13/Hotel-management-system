@@ -68,6 +68,31 @@ public:
 
   }
 
+  int room_input() {
+
+    int RoomNumber;
+    bool valid = false;
+
+    do
+    {
+      cout << "Enter a Roomid: " << flush;
+      cin >> RoomNumber;
+      if (cin.good())
+      {
+        valid = true;
+      }
+      else
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input! please re-enter." << endl;
+      }
+    } while (!valid);
+
+    return RoomNumber;
+
+  }
+
   void addguest(Account* account){
     auto receptionistAccount = make_unique<ReceptionistAccount>();  
     receptionistAccount->input();
@@ -100,79 +125,81 @@ public:
         switch (choice)
         {
           case FINDNUM: {
-            char performChoice;
             int RoomNumber;
-            cout << "Enter Roomid: ";
-            cin >> RoomNumber;
+            RoomNumber = room_input();
             auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](Account* account) { return account->getroom() == RoomNumber; });
-            do{
-                  if(it != Acc.end()){
-                  int choice;
-                  cout << "==========EDIT MENU==========" << endl;
-                  cout << "1.	Roomid" << endl;
-                  cout << "2.	Name" << endl;
-                  cout << "3.	Phone number" << endl;
-                  cout << "4.	Hours" << endl;
-                  cout << "5. Back" << endl;
-                  choice = getChoice();
-                  switch (choice)
-                  {
-                    case 1:{
-                      int new_room;
-                      cout << "Enter new roomid: ";
-                      cin >> new_room;
-  
-                      Account* target = (*it);
-                      target->setroom(new_room);
+            if (it != Acc.end())
+            {
+              int choice;
+              cout << "==========EDIT MENU==========" << endl;
+              cout << "1.	Roomid" << endl;
+              cout << "2.	Name" << endl;
+              cout << "3.	Phone number" << endl;
+              cout << "4.	Hours" << endl;
+              cout << "5. Back" << endl;
+              choice = getChoice();
+              switch (choice)
+              {
+              case 1:
+              {
+                int new_room;
+                cout << "Enter new roomid: ";
+                cin >> new_room;
 
-                      cout << "Roomid changed successfully" << endl;
-                    }
-                    break;
+                Account *target = (*it);
+                target->setroom(new_room);
 
-                    case 2:{
-                      string new_name;
-                      cout << "Enter new name: ";
-                      cin >> new_name;
-                      Account* target = (*it);
-                      target->setname(new_name);
-                      cout << "Name changed successfully" << endl;
-                    }
-                    break;
+                cout << "Roomid changed successfully" << endl;
+              }
+              break;
 
-                    case 3:{
-                      string new_num;
-                      cout << "Enter new PhoneNumber: ";
-                      cin >> new_num;
-                      Account* target = (*it);
-                      target->setnum(new_num);
-                      cout << "Phone number changed successfully" << endl;
-                    }
-                    break;
+              case 2:
+              {
+                string new_name;
+                cout << "Enter new name: ";
+                cin >> new_name;
+                Account *target = (*it);
+                target->setname(new_name);
+                cout << "Name changed successfully" << endl;
+              }
+              break;
 
-                    case 4:{
-                      int new_days;
-                      cout << "Enter new hours check in: ";
-                      cin >> new_days;
-                      dynamic_cast<ReceptionistAccount*>(*it)->setdays(new_days);
-                      cout << "Hours changed successfully" << endl;
-                    }
-                    break;
+              case 3:
+              {
+                string new_num;
+                cout << "Enter new PhoneNumber: ";
+                cin >> new_num;
+                Account *target = (*it);
+                target->setnum(new_num);
+                cout << "Phone number changed successfully" << endl;
+              }
+              break;
 
-                    case 5:
-                    break;
-                  
-                  default:
-                  cout << "Invalid Choice. Please try again" << endl;
-                      break;
-                  }
-                  }else {
-                      cout << "Guest not found" << endl;
-                      cout << "Press any key to continue...";
-                      cin.ignore();
-                      cin.get();
-                    }
-              }while(performChoice == 'y' || performChoice == 'Y');
-              
+              case 4:
+              {
+                int new_days;
+                cout << "Enter new hours check in: ";
+                cin >> new_days;
+                dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
+                cout << "Hours changed successfully" << endl;
+              }
+              break;
+
+              case 5:
+                break;
+
+              default:
+                cout << "Invalid Choice. Please try again" << endl;
+                break;
+              }
+            }
+            else
+            {
+              cout << "Guest not found" << endl;
+              cout << "Press any key to continue...";
+              cin.ignore();
+              cin.get();
+            }
           }
           break;
 
@@ -182,71 +209,74 @@ public:
               cout << "Enter name: ";
               cin >> name;
               auto it = find_if(Acc.begin(),Acc.end(),[name](const Account* account) { return account->getname() == name; });
-              do{
-                    if(it != Acc.end()){
-                    int choice;
-                    Account* target = (*it);
-                    cout << "==========EDIT MENU==========" << endl;
-                    cout << "1.	Roomid" << endl;
-                    cout << "2.	Name" << endl;
-                    cout << "3.	Phone number" << endl;
-                    cout << "4.	Hours" << endl;
-                    cout << "5. Back" << endl;
-                    choice = getChoice();
-                    switch (choice)
-                    {
-                      case 1:{
-                      int new_room;                    
-                      cout << "Enter new Roomid: ";
-                      cin >> new_room;
-                      target->setroom(new_room);
-                      cout << "Roomid changed successfully" << endl;
+              if (it != Acc.end())
+              {
+                int choice;
+                Account *target = (*it);
+                cout << "==========EDIT MENU==========" << endl;
+                cout << "1.	Roomid" << endl;
+                cout << "2.	Name" << endl;
+                cout << "3.	Phone number" << endl;
+                cout << "4.	Hours" << endl;
+                cout << "5. Back" << endl;
+                choice = getChoice();
+                switch (choice)
+                {
+                case 1:
+                {
+                  int new_room;
+                  cout << "Enter new Roomid: ";
+                  cin >> new_room;
+                  target->setroom(new_room);
+                  cout << "Roomid changed successfully" << endl;
+                }
+                break;
 
-                      }
-                      break;
+                case 2:
+                {
+                  string new_name;
+                  cout << "Enter new name: ";
+                  cin >> new_name;
+                  target->setname(new_name);
+                  cout << "Name changed successfully" << endl;
+                }
+                break;
 
-                      case 2:{
-                          string new_name;                    
-                          cout << "Enter new name: ";
-                          cin >> new_name;    
-                        target->setname(new_name);
-                        cout << "Name changed successfully" << endl;
-                      }
-                      break;
+                case 3:
+                {
+                  string new_num;
+                  cout << "Enter new Phone number: ";
+                  cin >> new_num;
+                  target->setnum(new_num);
+                  cout << "Phone number changed successfully" << endl;
+                }
+                break;
 
-                      case 3:{
-                        string new_num;                    
-                        cout << "Enter new Phone number: ";
-                        cin >> new_num;    
-                        target->setnum(new_num);
-                        cout << "Phone number changed successfully" << endl;
-                      }
-                      break;
+                case 4:
+                {
+                  int new_days;
+                  cout << "Enter new hours check in: ";
+                  cin >> new_days;
+                  dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
+                  cout << "hours changed successfully" << endl;
+                }
+                break;
 
-                      case 4:{
-                        int new_days;                    
-                        cout << "Enter new hours check in: ";
-                        cin >> new_days;    
-                        dynamic_cast<ReceptionistAccount*>(*it)->setdays(new_days);
-                        cout << "hours changed successfully" << endl;
-                      }
-                      break;
+                case 5:
+                  break;
 
-                      case 5:
-                      break;
-                    
-                    default:
-                    cout << "Invalid Choice. Please try again" << endl;
-                        break;
-                    }
-                    }else {
-                        cout << "Guest not found" << endl;
-                        cout << "Press any key to continue...";
-                        cin.ignore();
-                        cin.get();
-                    }
-                }while(performChoice == 'y' || performChoice == 'Y');
-                
+                default:
+                  cout << "Invalid Choice. Please try again" << endl;
+                  break;
+                }
+              }
+              else
+              {
+                cout << "Guest not found" << endl;
+                cout << "Press any key to continue...";
+                cin.ignore();
+                cin.get();
+              }
             }
             break;
 
@@ -258,7 +288,7 @@ public:
           cout << "Press any key to continue...";
           cin.ignore();
           cin.get();
-          break;
+          updateGuestinformation(account);
         }
 
   }
@@ -273,10 +303,8 @@ public:
         switch (choice)
         {
           case FINDNUM: {
-            char performChoice;
             int RoomNumber;
-            cout << "Enter Roomid: ";
-            cin >> RoomNumber;
+            RoomNumber = room_input();
             auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
             if(it != Acc.end()){
             cout << "Guest information to be deleted:\n";
@@ -390,7 +418,7 @@ public:
         cout << "Press any key to continue..." << endl;
         cin.ignore();
         cin.get();      
-        break;
+        sortGuestinformation();
         }
 
   }
@@ -405,10 +433,9 @@ public:
         switch (choice)
         {
         case FINDNUM:{
-            int roomNumber;
-            cout << "Enter Roomid: ";
-            cin >> roomNumber;
-            auto it = find_if(Acc.begin(),Acc.end(),[roomNumber](const Account* account) { return account->getroom() == roomNumber; });
+            int RoomNumber;
+            RoomNumber = room_input();
+            auto it = find_if(Acc.begin(),Acc.end(),[RoomNumber](const Account* account) { return account->getroom() == RoomNumber; });
             if(it != Acc.end()){
               cout << "Roomid found:" << endl;
               output_title();
@@ -456,7 +483,7 @@ public:
           cout << "Press any key to continue..." << endl;
           cin.ignore();
           cin.get();
-          break;
+          searchGuestinformation(account);
         
         }
   }
