@@ -3,6 +3,7 @@
 #include "Receptionist.cpp"
 #include "ReceptionistAccount.cpp"
 #include "registration.cpp"
+#include "validation.cpp"
 using namespace std;
 
 enum {
@@ -12,8 +13,7 @@ enum {
     DELETEGUEST,
     SORTGUEST,
     SEARCHGUEST,
-    // SAVEGUEST,
-    // LOADGUEST,
+    SAVEGUEST,
     LOGOUT
 
 };
@@ -22,7 +22,8 @@ class Application {
  private:
 
 Receptionist re;
-Account* account{};
+Account* account;
+validation val;
 
     void HotelMenu() {
         cout << "==========Hotel Management Menu==========" << endl;
@@ -32,8 +33,8 @@ Account* account{};
         cout << "4. Delete a specific Guest information" << endl;
         cout << "5. Sort Guest information" << endl;
         cout << "6. Search for a specific Guest information" << endl;
-        // cout << "7. Save guest data" << endl;
-        cout << "7. Log out" << endl;
+        cout << "7. Save guest data" << endl;
+        cout << "8. Log out" << endl;
     }
 
     void authenticationMenu(){
@@ -42,33 +43,6 @@ Account* account{};
         cout << "2. Register" << endl;
         cout << "3. Exit" << endl;
     }
-
-
-    int getChoice() {
-        
-    int choice;
-    bool valid= false;
-
-    do
-        {
-        cout << "Enter a number: " << flush;
-        cin >> choice;
-        if (cin.good())
-        {
-            valid = true;
-        }
-        else
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input! please re-enter." << endl;
-        }
-    } while (!valid);
-    
-    return choice;
-
-    }
-
     
  public:
 
@@ -79,7 +53,7 @@ Account* account{};
    
     do {
         HotelMenu();
-        choice = getChoice();
+        choice = val.getChoice();
 
         switch (choice) {
             case ADDGUEST: {
@@ -108,9 +82,9 @@ Account* account{};
                 re.searchGuestinformation(account);
                 break;
 
-            // case SAVEGUEST:
-            //     re.saveGuestinformation();
-            //     break;
+            case SAVEGUEST:
+                re.saveGuestinformation();
+                break;
             case LOGOUT:
                 break;
 
@@ -119,7 +93,7 @@ Account* account{};
                 break;
             }
         
-        }while (choice != 7);
+        }while (choice != 8);
  }
 
     void run() {
@@ -129,22 +103,21 @@ Account* account{};
      do {
      
       authenticationMenu();
-      choice = getChoice();
+      choice = val.getChoice();
       switch (choice)
       {
       case 1:
         if(log.userLogin()==true){
           system("cls");
-        //   re.loadGuestinformation();
+          re.loadGuestinformation();
           HotelManagement();
-        }else{
-          cout << "Login failed. Please try again." << endl;
         }
       break;
       case 2:
         log.userRegister();
       break;
       case 3:
+      cout << "Exiting Programm..." << endl;
       exit(1);
      
       default:

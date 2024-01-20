@@ -131,7 +131,7 @@ public:
                 case 4:
                 {
                   int new_days;
-                  cout << "Enter new hours check in: ";
+                  cout << "Enter new hours stay: ";
                   cin >> new_days;
                   dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
                   cout << "Hours changed successfully" << endl;
@@ -153,7 +153,7 @@ public:
 
               if (Acc.empty())
               {
-                cout << "There nothing to update" << endl;
+                cout << "Nothing left to update" << endl;
                 cout << "Press Enter to Continue...";
                 cin.ignore();
                 cin.get();
@@ -223,7 +223,7 @@ public:
                 case 4:
                 {
                   int new_days;
-                  cout << "Enter new hours check in: ";
+                  cout << "Enter new hours stay: ";
                   cin >> new_days;
                   dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
                   cout << "hours changed successfully" << endl;
@@ -246,7 +246,7 @@ public:
 
               if (Acc.empty())
               {
-                cout << "There nothing to update" << endl;
+                cout << "Nothing left to update" << endl;
                 cout << "Press Enter to Continue...";
                 cin.ignore();
                 cin.get();
@@ -295,6 +295,7 @@ public:
               Account* target = (*it);
               output_title();
               target->output();
+              cout << endl;
               char choice;
               cout << "Do you want to delete this information? (y/n): ";
               cin >> choice;
@@ -310,7 +311,7 @@ public:
 
               if (Acc.empty()) {
 
-                cout << "There nothing to delete" << endl;
+                cout << "Nothing left to delete" << endl;
                 cout << "Press Enter to continue...";
                 cin.ignore();
                 cin.get();
@@ -354,7 +355,7 @@ public:
 
               if (Acc.empty())
               {
-                cout << "There nothing to delete" << endl;
+                cout << "Nothing left to delete" << endl;
                 cout << "Press Enter to continue...";
                 cin.ignore();
                 cin.get();
@@ -374,7 +375,7 @@ public:
 
           default:
           cout << "Invalid choice." << endl;
-          cout << "Press any key to retry...";
+          cout << "Press enter to retry...";
           cin.ignore();
           cin.get();
           deleteGuestinformation(account);
@@ -458,6 +459,7 @@ public:
               output_title();
               Account *target = (*it);
               target->output();
+              cout << endl;
             }
             else
             {
@@ -466,7 +468,7 @@ public:
 
             if (Acc.empty())
               {
-                cout << "There nothing to search" << endl;
+                cout << "Nothing left to search" << endl;
                 cout << "Press Enter to Continue...";
                 cin.ignore();
                 cin.get();
@@ -495,6 +497,7 @@ public:
               output_title();
               Account *target = (*it);
               target->output();
+              cout << endl;
             }
             else
             {
@@ -503,7 +506,7 @@ public:
 
             if (Acc.empty())
               {
-                cout << "There nothing to search" << endl;
+                cout << "Nothing left to search" << endl;
                 cout << "Press Enter to Continue...";
                 cin.ignore();
                 cin.get();
@@ -531,45 +534,43 @@ public:
         }
   }
 
-// Cant implement the code yet
+  void saveGuestinformation() {
+    ofstream outputFile("Guest.dat", ios::out | ios::binary);
 
-//   void saveGuestinformation() {
-//     ofstream outputFile("Guest.dat", ios::out | ios::binary);
+    if (!outputFile.is_open()) {
+        cout << "Error in creating file...\n";
+        exit(1);
+    } else {
+        for (const auto& accountPtr : Acc) {
+            outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
+        }
 
-//     if (!outputFile.is_open()) {
-//         cout << "Error in creating file...\n";
-//         exit(1);
-//     } else {
-//         for (const auto& accountPtr : Acc) {
-//             outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
-//         }
+        cout << "File saved successfully" << endl;
+    }
 
-//         cout << "File saved successfully" << endl;
-//     }
+    outputFile.close();
+  }    
 
-//     outputFile.close();
-//   }    
-
-//   void loadGuestinformation() {
-//     ifstream inputFile("Guest.dat", ios::in | ios::binary);
-//     if (!inputFile.is_open()) {
-//         cout << "Error in opening file...\n";
-//         exit(1);
-//     }
-//     try {
-//         while (true) {
-//           Account* account = new Account();
-//           if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
-//               delete account;
-//               break;
-//           }
-//           // addguest(account);
-//           cout << "File loaded successfully" << endl;
-//         }
-//     } catch (const std::exception& e) {
-//         cerr << "Exception: " << e.what() << endl;
-//       }
-//     inputFile.close();
-// }    
+  void loadGuestinformation() {
+    ifstream inputFile("Guest.dat", ios::in | ios::binary);
+    if (!inputFile.is_open()) {
+        cout << "Error in opening file...\n";
+        exit(1);
+    }
+    try {
+        while (true) {
+          Account* account = new Account();
+          if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
+              delete account;
+              break;
+          }
+          addguest(account);
+          cout << "File loaded successfully" << endl;
+        }
+    } catch (const std::exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+      }
+    inputFile.close();
+}    
 
 };

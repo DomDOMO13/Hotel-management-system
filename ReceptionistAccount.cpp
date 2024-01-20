@@ -40,7 +40,7 @@ void input() {
 
 void output() override {
     Account::output();
-    cout << setw(18) << getdays() << endl;
+    cout << setw(18) << getdays();
 }
 
 };

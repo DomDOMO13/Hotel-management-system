@@ -42,7 +42,7 @@ bool userLogin() {
     fin.close();
 
     if (!userFound) {
-        cout << "User not found" << endl;
+        cout << "Username or Password is incorrected!" << endl;
     }
     return userFound;
 }
