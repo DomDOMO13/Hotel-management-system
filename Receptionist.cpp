@@ -535,14 +535,17 @@ public:
   }
 
   void saveGuestinformation() {
-    ofstream outputFile("Guest.dat", ios::out | ios::binary);
+    ofstream outputFile("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\Guest.dat", ios::out |ios::app);
 
     if (!outputFile.is_open()) {
         cout << "Error in creating file...\n";
         exit(1);
     } else {
-        for (const auto& accountPtr : Acc) {
-            outputFile.write(reinterpret_cast<char*>(accountPtr), sizeof(Account));
+        for (Account* account: Acc) {
+
+            cout << "<<<=====" << (char*)& account;
+
+            outputFile.write((char*)& account, sizeof(Account));
         }
 
         cout << "File saved successfully" << endl;
@@ -552,25 +555,33 @@ public:
   }    
 
   void loadGuestinformation() {
-    ifstream inputFile("Guest.dat", ios::in | ios::binary);
+
+    ifstream inputFile("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\Guest.dat", ios::in|ios::app);
+
     if (!inputFile.is_open()) {
         cout << "Error in opening file...\n";
         exit(1);
     }
-    try {
-        while (true) {
-          Account* account = new Account();
-          if (!inputFile.read(reinterpret_cast<char*>(account), sizeof(Account))) {
-              delete account;
-              break;
-          }
-          addguest(account);
-          cout << "File loaded successfully" << endl;
-        }
-    } catch (const std::exception& e) {
-        cerr << "Exception: " << e.what() << endl;
+
+
+    Account account;
+    
+    try
+    {
+      while (inputFile.read((char* )& account, sizeof(Account)))
+      {
+        cout << "====>" << account.getname();
+        // Acc.push_back(&account);
       }
+    }
+    catch(const std::exception& e)
+    {
+      std::cerr << e.what() << '\n';
+    }
+    
+
+    cout << "File loaded successfully" << endl;
     inputFile.close();
-}    
+  }
 
 };
