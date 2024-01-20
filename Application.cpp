@@ -14,7 +14,8 @@ enum {
     SORTGUEST,
     SEARCHGUEST,
     SAVEGUEST,
-    LOGOUT
+    LOADGUEST,
+    LOGOUT,
 
 };
 
@@ -34,7 +35,9 @@ validation val;
         cout << "5. Sort Guest information" << endl;
         cout << "6. Search for a specific Guest information" << endl;
         cout << "7. Save guest data" << endl;
-        cout << "8. Log out" << endl;
+
+        cout << "8. load guest" <<endl;
+        cout << "9. Log out" << endl;
     }
 
     void authenticationMenu(){
@@ -49,7 +52,6 @@ validation val;
  void HotelManagement(){
     
     int choice = 0;
-    int option = 0;
    
     do {
         HotelMenu();
@@ -85,7 +87,12 @@ validation val;
             case SAVEGUEST:
                 re.saveGuestinformation();
                 break;
+                
             case LOGOUT:
+                break;
+
+            case LOADGUEST:
+                re.loadGuestinformation();
                 break;
 
             default:
@@ -93,7 +100,7 @@ validation val;
                 break;
             }
         
-        }while (choice != 8);
+        }while (choice != 9);
  }
 
     void run() {
@@ -109,7 +116,7 @@ validation val;
       case 1:
         if(log.userLogin()==true){
           system("cls");
-          re.loadGuestinformation();
+        //   re.loadGuestinformation();
           HotelManagement();
         }
       break;
@@ -126,6 +133,10 @@ validation val;
       }
 
      }while(choice != 0);
+    }
+
+    void testRun() {
+        HotelManagement();
     }
 
 };

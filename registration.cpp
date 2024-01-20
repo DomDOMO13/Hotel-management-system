@@ -24,7 +24,7 @@ bool userLogin() {
     cin >> password;
 
     bool userFound = false;
-    ifstream fin("users.dat", ios::in);
+    ifstream fin("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\users.dat", ios::in);
 
     if (!fin.is_open()) {
         cerr << "Cannot open file" << endl;
@@ -91,7 +91,7 @@ void userRegister() {
     // }
     // fin.close();
 
-    ofstream fout("users.dat", ios::out | ios::app);
+    ofstream fout("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\users.dat", ios::out | ios::app);
 
     if (!fout.is_open()) {
         cerr << "Cannot open file" << endl;
