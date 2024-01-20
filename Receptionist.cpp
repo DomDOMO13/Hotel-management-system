@@ -541,9 +541,9 @@ public:
         cout << "Error in creating file...\n";
         exit(1);
     } else {
-      for (ReceptionistAccount *Raccount : Acc)
+      for (Account *account : Acc)
       {
-        Raccount->write(outputFile);
+        account->write(outputFile);
       }
 
         cout << "File saved successfully" << endl;

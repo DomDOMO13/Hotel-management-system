@@ -7,8 +7,8 @@ using namespace std;
 int main(){
 
     Application app;
-    // app.run();
-    app.testRun();
+    app.run();
+    // app.testRun();
     return 0;
 
-}
+};

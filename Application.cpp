@@ -116,7 +116,7 @@ validation val;
       case 1:
         if(log.userLogin()==true){
           system("cls");
-        //   re.loadGuestinformation();
+          re.loadGuestinformation();
           HotelManagement();
         }
       break;
@@ -135,8 +135,8 @@ validation val;
      }while(choice != 0);
     }
 
-    void testRun() {
-        HotelManagement();
-    }
+    // void testRun() {
+    //     HotelManagement();
+    // }
 
 };
