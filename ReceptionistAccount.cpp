@@ -6,6 +6,7 @@
 using namespace std;
 
 class ReceptionistAccount : public Account {
+
 private:
 int Days;
 
@@ -43,38 +44,18 @@ void output() override {
     cout << setw(18) << getdays();
 }
 
-istream &read(std::istream &in)
-{
-  in.read(reinterpret_cast<char *>(&RoomID), sizeof(RoomID));
-
-  int length;
-  in.read(reinterpret_cast<char *>(&length), sizeof(length));
-  name.resize(length);
-  in.read(&name[0], length);
-
-  in.read(reinterpret_cast<char *>(&length), sizeof(length));
-  phone_num.resize(length);
-  in.read(&phone_num[0], length);
-
-  return in;
-}
-
 ofstream &write(std::ofstream &out)
 {
-  out.write(reinterpret_cast<const char *>(&RoomID), sizeof(RoomID));
-
-  int length = name.length();
-  out.write(reinterpret_cast<const char *>(&length), sizeof(length));
-  out.write(name.c_str(), length);
-
-  length = phone_num.length();
-  out.write(reinterpret_cast<const char *>(&length), sizeof(length));
-  out.write(phone_num.c_str(), length);
-
-  out.write(reinterpret_cast<const char *>(&RoomID), sizeof(RoomID));
+  Account::write(out);
+  out.write(reinterpret_cast<const char *>(&Days), sizeof(Days));
   return out;
 }
 
+istream &read(std::istream &in)
+{
+  Account::read(in);
+  in.read(reinterpret_cast<char *>(&Days), sizeof(Days));
+  return in;
+}
 
 };
-

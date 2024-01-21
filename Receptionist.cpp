@@ -26,7 +26,7 @@ enum {
 class Receptionist : public AccountDAO {
 
 private:
-  vector<Account*> Acc;
+  vector<ReceptionistAccount*> Acc;
 
 public:
 
@@ -61,7 +61,7 @@ public:
           cerr << "Exception: " << e.what() << endl;
       }
     }
-    cout << "Press any key to continue...";
+    cout << "Press Enter to continue...";
     cin.ignore();
     cin.get();
   }
@@ -85,90 +85,88 @@ public:
             {
               if (it != Acc.end())
                 {
-                int choice;
-                cout << "==========EDIT MENU==========" << endl;
-                cout << "1.	Roomid" << endl;
-                cout << "2.	Name" << endl;
-                cout << "3.	Phone number" << endl;
-                cout << "4.	Hours" << endl;
-                cout << "5. Back" << endl;
-                choice = val.getChoice();
-                switch (choice)
-                {
-                case 1:
-                {
-                  int new_room;
-                  cout << "Enter new roomid: ";
-                  cin >> new_room;
-                  Account *target = (*it);
-                  target->setroom(new_room);
-                  cout << "Roomid changed successfully" << endl;
-                }
-                break;
+                  int choice;
+                  cout << "==========EDIT MENU==========" << endl;
+                  cout << "1.	Roomid" << endl;
+                  cout << "2.	Name" << endl;
+                  cout << "3.	Phone number" << endl;
+                  cout << "4.	Hours" << endl;
+                  cout << "5. Back" << endl;
+                  choice = val.getChoice();
+                  switch (choice) {
+                    case 1:
+                    {
+                      int new_room;
+                      cout << "Enter new roomid: ";
+                      cin >> new_room;
+                      Account *target = (*it);
+                      target->setroom(new_room);
+                      cout << "Roomid changed successfully" << endl;
+                    }
+                    break;
 
-                case 2:
-                {
-                  string new_name;
-                  cout << "Enter new name: ";
-                  cin >> new_name;
-                  Account *target = (*it);
-                  target->setname(new_name);
-                  cout << "Name changed successfully" << endl;
-                }
-                break;
+                    case 2:
+                    {
+                      string new_name;
+                      cout << "Enter new name: ";
+                      cin >> new_name;
+                      Account *target = (*it);
+                      target->setname(new_name);
+                      cout << "Name changed successfully" << endl;
+                    }
+                    break;
 
-                case 3:
-                {
-                  string new_num;
-                  cout << "Enter new PhoneNumber: ";
-                  cin >> new_num;
-                  Account *target = (*it);
-                  target->setnum(new_num);
-                  cout << "Phone number changed successfully" << endl;
-                }
-                break;
+                    case 3:
+                    {
+                      string new_num;
+                      cout << "Enter new PhoneNumber: ";
+                      cin >> new_num;
+                      Account *target = (*it);
+                      target->setnum(new_num);
+                      cout << "Phone number changed successfully" << endl;
+                    }
+                    break;
 
-                case 4:
-                {
-                  int new_days;
-                  cout << "Enter new hours stay: ";
-                  cin >> new_days;
-                  dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
-                  cout << "Hours changed successfully" << endl;
-                }
-                break;
+                    case 4:
+                    {
+                      int new_days;
+                      cout << "Enter new hours stay: ";
+                      cin >> new_days;
+                      dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
+                      cout << "Hours changed successfully" << endl;
+                    }
+                    break;
 
-                case 5:
-                  break;
+                    case 5:
+                      break;
 
-                default:
-                  cout << "Invalid Choice. Please try again" << endl;
-                  break;
-                }
+                    default:
+                      cout << "Invalid Choice. Please try again" << endl;
+                      break;
+                    }
+                  }
+                  else
+                  {
+                    cout << "Guest not found" << endl;
+                  }
+
+                  if (Acc.empty())
+                  {
+                    cout << "Nothing left to update" << endl;
+                    cout << "Press Enter to Continue...";
+                    cin.ignore();
+                    cin.get();
+                    break;
+                  }
+
+                  cout << "Do you want to continue (Y/N)? ";
+                  cin >> ans;
+                } while ((ans == 'Y') || (ans == 'y'));
+                
               }
-              else
-              {
-                cout << "Guest not found" << endl;
-              }
+              break;
 
-              if (Acc.empty())
-              {
-                cout << "Nothing left to update" << endl;
-                cout << "Press Enter to Continue...";
-                cin.ignore();
-                cin.get();
-                break;
-              }
-
-              cout << "Do you want to continue (Y/N)? ";
-              cin >> ans;
-            } while ((ans == 'Y') || (ans == 'y'));
-            
-          }
-          break;
-
-          case FINDNAME:
-          {
+          case FINDNAME: {
             char ans = 'N';
             string name;
             cout << "Enter name: ";
@@ -177,8 +175,7 @@ public:
 
             do
             {
-              if (it != Acc.end())
-              {
+              if (it != Acc.end()) {
                 int choice;
                 Account *target = (*it);
                 cout << "==========EDIT MENU==========" << endl;
@@ -188,54 +185,53 @@ public:
                 cout << "4.	Hours" << endl;
                 cout << "5. Back" << endl;
                 choice = val.getChoice();
-                switch (choice)
-                {
-                case 1:
-                {
-                  int new_room;
-                  cout << "Enter new Roomid: ";
-                  cin >> new_room;
-                  target->setroom(new_room);
-                  cout << "Roomid changed successfully" << endl;
-                }
-                break;
-
-                case 2:
-                {
-                  string new_name;
-                  cout << "Enter new name: ";
-                  cin >> new_name;
-                  target->setname(new_name);
-                  cout << "Name changed successfully" << endl;
-                }
-                break;
-
-                case 3:
-                {
-                  string new_num;
-                  cout << "Enter new Phone number: ";
-                  cin >> new_num;
-                  target->setnum(new_num);
-                  cout << "Phone number changed successfully" << endl;
-                }
-                break;
-
-                case 4:
-                {
-                  int new_days;
-                  cout << "Enter new hours stay: ";
-                  cin >> new_days;
-                  dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
-                  cout << "hours changed successfully" << endl;
-                }
-                break;
-
-                case 5:
+                switch (choice) {
+                  case 1:
+                  {
+                    int new_room;
+                    cout << "Enter new Roomid: ";
+                    cin >> new_room;
+                    target->setroom(new_room);
+                    cout << "Roomid changed successfully" << endl;
+                  }
                   break;
 
-                default:
-                  cout << "Invalid Choice. Please try again" << endl;
+                  case 2:
+                  {
+                    string new_name;
+                    cout << "Enter new name: ";
+                    cin >> new_name;
+                    target->setname(new_name);
+                    cout << "Name changed successfully" << endl;
+                  }
                   break;
+
+                  case 3:
+                  {
+                    string new_num;
+                    cout << "Enter new Phone number: ";
+                    cin >> new_num;
+                    target->setnum(new_num);
+                    cout << "Phone number changed successfully" << endl;
+                  }
+                  break;
+
+                  case 4:
+                  {
+                    int new_days;
+                    cout << "Enter new hours stay: ";
+                    cin >> new_days;
+                    dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
+                    cout << "hours changed successfully" << endl;
+                  }
+                  break;
+
+                  case 5:
+                    break;
+
+                  default:
+                    cout << "Invalid Choice. Please try again" << endl;
+                    break;
                 }
               }
 
@@ -535,22 +531,22 @@ public:
   }
 
   void saveGuestinformation() {
-    ofstream outputFile("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\Guest.dat", ios::out |ios::app |ios::binary);
-
+    ofstream outputFile("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\Guest.dat", ios::out |ios::app |ios::binary);  
     if (!outputFile.is_open()) {
         cout << "Error in creating file...\n";
         exit(1);
     } else {
-      for (Account *account : Acc)
+      for (ReceptionistAccount *Raccount : Acc)
       {
-        account->write(outputFile);
+        Raccount->write(outputFile);
+        cout << "test" << &outputFile;
       }
 
-        cout << "File saved successfully" << endl;
+      cout << "File saved successfully" << endl;
     }
 
     outputFile.close();
-  }    
+  }
 
   void loadGuestinformation() {
     ifstream inputFile("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\Guest.dat", ios::in|ios::binary);
@@ -559,18 +555,17 @@ public:
         cout << "Error in opening file...\n";
         exit(1);
     }
-    Account account;
     Acc.clear();
     while (inputFile)
     {
-      Account *account = new Account();
-      account->read(inputFile);
+      ReceptionistAccount *Raccount = new ReceptionistAccount();
+      Raccount->read(inputFile);
       if (inputFile.eof())
       {
-        delete account;
+        delete Raccount;
         break;
       }
-      Acc.push_back(account);
+      Acc.push_back(Raccount);
     }
     cout << "File loaded successfully" << endl;
     inputFile.close();

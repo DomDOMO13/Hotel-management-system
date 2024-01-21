@@ -135,8 +135,4 @@ validation val;
      }while(choice != 0);
     }
 
-    // void testRun() {
-    //     HotelManagement();
-    // }
-
 };

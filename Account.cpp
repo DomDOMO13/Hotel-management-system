@@ -91,22 +91,6 @@ virtual void input(){
 
 }
 
-istream &read(std::istream &in)
-{
-  in.read(reinterpret_cast<char *>(&RoomID), sizeof(RoomID));
-
-  int length;
-  in.read(reinterpret_cast<char *>(&length), sizeof(length));
-  name.resize(length);
-  in.read(&name[0], length);
-
-  in.read(reinterpret_cast<char *>(&length), sizeof(length));
-  phone_num.resize(length);
-  in.read(&phone_num[0], length);
-
-  return in;
-}
-
 ofstream &write(std::ofstream &out)
 {
   out.write(reinterpret_cast<const char *>(&RoomID), sizeof(RoomID));
@@ -119,8 +103,25 @@ ofstream &write(std::ofstream &out)
   out.write(reinterpret_cast<const char *>(&length), sizeof(length));
   out.write(phone_num.c_str(), length);
 
-  out.write(reinterpret_cast<const char *>(&RoomID), sizeof(RoomID));
   return out;
+}
+
+istream &read(std::istream &in)
+{
+  int length;
+
+  in.read(reinterpret_cast<char *>(&RoomID), sizeof(RoomID));
+
+  in.read(reinterpret_cast<char *>(&length), sizeof(length));
+  name.resize(length);
+  in.read(&name[0], length);
+
+  in.read(reinterpret_cast<char *>(&length), sizeof(length));
+  phone_num.resize(length);
+  in.read(&phone_num[0], length);
+
+
+  return in;
 }
 
 };
