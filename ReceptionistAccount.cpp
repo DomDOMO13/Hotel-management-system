@@ -8,20 +8,20 @@ using namespace std;
 class ReceptionistAccount : public Account {
 
   private:
-    int Days;
+    int hour;
 
   public:
     ReceptionistAccount() : Account() {
-      Days = 0;
+      hour = 0;
     }
 
-    ReceptionistAccount(int RoomID, string name, string phone_num, int Days) : Account (RoomID, name, phone_num) {
-      setdays(Days);
+    ReceptionistAccount(int RoomID, string name, string phone_num, int hour) : Account (RoomID, name, phone_num) {
+      setdays(hour);
     }
 
-    void setdays(int Days) {
-      if(Days > 0) {
-        this-> Days = Days;
+    void setdays(int hour) {
+      if(hour > 0) {
+        this-> hour = hour;
       }
       else {
         throw BadInputException();
@@ -29,14 +29,14 @@ class ReceptionistAccount : public Account {
     }
 
     int getdays () const {
-      return Days;
+      return hour;
     }
 
     void input() {
-      int day;
+      int hour;
       Account::input();
-      day = val.input_day();
-      setdays(day);
+      hour = vali.input_day();
+      setdays(hour);
     }
 
     void output() override {
@@ -46,13 +46,13 @@ class ReceptionistAccount : public Account {
 
     ofstream &write(std::ofstream &out) {
       Account::write(out);
-      out.write(reinterpret_cast<const char *>(&Days), sizeof(Days));
+      out.write(reinterpret_cast<const char *>(&hour), sizeof(hour));
       return out;
     }
 
     istream &read(std::istream &in) {
       Account::read(in);
-      in.read(reinterpret_cast<char *>(&Days), sizeof(Days));
+      in.read(reinterpret_cast<char *>(&hour), sizeof(hour));
       return in;
     }
 

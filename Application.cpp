@@ -22,7 +22,7 @@ class Application {
 
         Receptionist re;
         Account* account;
-        validation val;
+        validation vali;
 
         void HotelMenu() {
             cout << "==========Hotel Management Menu==========" << endl;
@@ -49,7 +49,7 @@ class Application {
             int choice = 0;
             do {
                 HotelMenu();
-                choice = val.getChoice();
+                choice = vali.getChoice();
                 switch (choice) {
                     case ADDGUEST: {
                         re.addguest(account);
@@ -98,13 +98,14 @@ class Application {
 
             do {
                 authenticationMenu();
-                choice = val.getChoice();
+                choice = vali.getChoice();
                 switch (choice)
                 {
                 case 1:
                     if (log.userLogin() == true) {
                         system("cls");
                         re.loadGuestinformation();
+                        cout << "Welcome to Hotel management system" << endl;
                         HotelManagement();
                     }
                     break;

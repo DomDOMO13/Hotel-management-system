@@ -8,6 +8,13 @@ class validation
     const int maxchar = 12;
     bool boolean;
 
+    bool validate_user(string user) {
+      if (user.length() > 10 ) {
+        return false;
+      }
+      return true;
+    }
+
     bool validate_room(int num) {
       if (cin.fail() || num > 200) {
         return false;
@@ -36,21 +43,32 @@ class validation
 
   public:
 
-    bool length_check (std::string input) {
-      return boolean = input.length() < maxchar;
-    };
-
-    void setlength_check(const bool boolean) {
-        if(boolean != 1 || boolean != 0) {
-            this->boolean = boolean;
+    string input_username() {
+      string username;
+      while (true) {
+        cout << "Enter Username: ";
+        cin >> username;
+        if (!validate_user(username)) {
+          cout << "Error: Invalid/max letter reached" << endl;
         }
         else {
-            throw BadInputException();
+          return username;
         }
+      }
     }
-    
-    bool getlength_check() const {
-      return boolean;
+
+    string input_password() {
+      string password;
+      while (true) {
+        cout << "Enter Password: ";
+        cin >> password;
+        if (!validate_user(password)) {
+          cout << "Error: Invalid/max letter reached" << endl;
+        }
+        else {
+          return password;
+        }
+      }
     }
 
     int input_room() {
@@ -115,29 +133,11 @@ class validation
       }
     }
 
-    int room_input_validation() {
-      int RoomNumber;
-      bool valid = false;
-      do {
-        cout << "Enter a Roomid: " << flush;
-        cin >> RoomNumber;
-        if (cin.good()) {
-          valid = true;
-        }
-        else {
-          cin.clear();
-          cin.ignore(numeric_limits<streamsize>::max(), '\n');
-          cout << "Invalid input! please re-enter." << endl;
-        }
-      } while (!valid);
-      return RoomNumber;
-    }
-
     int getChoice() {
       int choice;
       bool valid = false;
       do {
-        cout << "Enter a number: " << flush;
+        cout << "Enter a choice: " << flush;
         cin >> choice;
         if (cin.good()) {
           valid = true;

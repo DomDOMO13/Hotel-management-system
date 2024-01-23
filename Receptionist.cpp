@@ -31,7 +31,7 @@ private:
 
 public:
 
-  validation val;
+  validation vali;
 
   ~Receptionist() {
     for (auto& account : Acc) {
@@ -41,7 +41,7 @@ public:
 
   void info_edit_menu() {
     cout << "==========EDIT MENU==========" << endl;
-    cout << "1.	Roomid" << endl;
+    cout << "1.	Room" << endl;
     cout << "2.	Name" << endl;
     cout << "3.	Phone number" << endl;
     cout << "4.	Hours" << endl;
@@ -50,7 +50,7 @@ public:
 
   void search_menu() {
     cout << "==========Search MENU==========" << endl;
-    cout << "1. Seach by roomid" << endl;
+    cout << "1. Seach by room" << endl;
     cout << "2. Seach by name" << endl;
     cout << "3. Back to main menu" << endl;
   }
@@ -100,25 +100,25 @@ public:
     int choice;
     char ans = 'N';
     search_menu();
-    choice = val.getChoice();
+    choice = vali.getChoice();
     switch (choice) {
     case FINDNUM: {
       int RoomNumber;
-      RoomNumber = val.room_input_validation();
+      RoomNumber = vali.input_room();
       auto it = find_if(Acc.begin(), Acc.end(), [RoomNumber](Account *account) { return account->getroom() == RoomNumber; });
       do {
         if (it != Acc.end()) {
           int choice;
           info_edit_menu();
-          choice = val.getChoice();
+          choice = vali.getChoice();
           switch (choice) {
             case 1: {
               int new_room;
-              cout << "Enter new roomid: ";
+              cout << "Enter new room: ";
               cin >> new_room;
               Account *target = (*it);
               target->setroom(new_room);
-              cout << "Roomid changed successfully" << endl;
+              cout << "Room changed successfully" << endl;
             }
             break;
 
@@ -134,7 +134,7 @@ public:
 
             case 3: {
               string new_num;
-              cout << "Enter new PhoneNumber: ";
+              cout << "Enter new Phone number: ";
               cin >> new_num;
               Account *target = (*it);
               target->setnum(new_num);
@@ -144,10 +144,10 @@ public:
 
             case 4: {
               int new_days;
-              cout << "Enter new hours stay: ";
+              cout << "Enter new hour: ";
               cin >> new_days;
               dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
-              cout << "Hours changed successfully" << endl;
+              cout << "Hour changed successfully" << endl;
             }
             break;
 
@@ -184,14 +184,14 @@ public:
           int choice;
           Account *target = (*it);
           info_edit_menu();
-          choice = val.getChoice();
+          choice = vali.getChoice();
           switch (choice) {
           case 1: {
             int new_room;
-            cout << "Enter new Roomid: ";
+            cout << "Enter new room: ";
             cin >> new_room;
             target->setroom(new_room);
-            cout << "Roomid changed successfully" << endl;
+            cout << "Room changed successfully" << endl;
           }
           break;
 
@@ -215,10 +215,10 @@ public:
 
           case 4: {
             int new_days;
-            cout << "Enter new hours stay: ";
+            cout << "Enter new hour: ";
             cin >> new_days;
             dynamic_cast<ReceptionistAccount *>(*it)->setdays(new_days);
-            cout << "hours changed successfully" << endl;
+            cout << "hour changed successfully" << endl;
           }
           break;
 
@@ -254,9 +254,7 @@ public:
 
     default:
       cout << "Invalid choice." << endl;
-      cout << "Press any key to continue...";
-      cin.ignore();
-      cin.get();
+      Button_to_Continue();
       updateGuestinformation(account);
     }
   }
@@ -265,12 +263,12 @@ public:
     int choice;
     char ans = 'N';
     search_menu();
-    choice = val.getChoice();
+    choice = vali.getChoice();
     switch (choice) {
     case FINDNUM: {
       int RoomNumber;
       do {
-        RoomNumber = val.room_input_validation();
+        RoomNumber = vali.input_room();
         auto it = find_if(Acc.begin(), Acc.end(), [RoomNumber](const Account *account) { return account->getroom() == RoomNumber; });
         if (it != Acc.end())
         {
@@ -358,7 +356,7 @@ public:
     cout << "1. Sort by Ascending" << endl;
     cout << "2. Sort by Descending" << endl;
     cout << "3. Back to main menu" << endl;
-    choice = val.getChoice();
+    choice = vali.getChoice();
     switch (choice)
     {
     case 1:
@@ -391,12 +389,12 @@ public:
     int choice;
     char ans = 'N';
     search_menu();
-    choice = val.getChoice();
+    choice = vali.getChoice();
     switch (choice) {
     case FINDNUM: {
       int RoomNumber;
       do {
-        RoomNumber = val.room_input_validation();
+        RoomNumber = vali.input_room();
         auto it = find_if(Acc.begin(), Acc.end(), [RoomNumber](const Account *account) { return account->getroom() == RoomNumber; });
         if (it != Acc.end()) {
           cout << "Roomid found:" << endl;

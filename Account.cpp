@@ -12,7 +12,7 @@ class Account {
     int RoomID;
     string name;
     string phone_num;
-    validation val;
+    validation vali;
 
   public:
 
@@ -77,15 +77,14 @@ class Account {
       int room;
       string name;
       string num;
-      validation val;
 
-      room = val.input_room();
+      room = vali.input_room();
       setroom(room);
 
-      name = val.input_name();
+      name = vali.input_name();
       setname(name);
 
-      num = val.input_num();
+      num = vali.input_num();
       setnum(num);
 
     }

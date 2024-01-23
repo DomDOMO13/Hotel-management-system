@@ -18,29 +18,22 @@ validation vali;
 
 
 bool userLogin() {
-    cout << "Enter the username: ";
-    cin >> username;
-    cout << "Enter the password: ";
-    cin >> password;
-
     bool userFound = false;
+    string fileUsername, filePassword;
+    username = vali.input_username();
+    password = vali.input_password();
     ifstream fin("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\users.dat", ios::in);
-
     if (!fin.is_open()) {
         cerr << "Cannot open file" << endl;
         return false;
     }
-
-    string fileUsername, filePassword;
     while (fin >> fileUsername >> filePassword) {
         if (fileUsername == username && filePassword == password) {
-            cout << "Welcome to Hotel management system" << " "<< username << endl;
             userFound = true;
             break;
         }
     }
     fin.close();
-
     if (!userFound) {
         cout << "Username or Password is incorrected!" << endl;
     }
@@ -48,61 +41,16 @@ bool userLogin() {
 }
 
 void userRegister() {
-
-    while (1)
-    {
-        cout << "Enter the Username: ";
-        cin >> username;
-        vali.length_check(username);
-        if (!vali.length_check(username)) {
-            cout << "The input is too long." << endl;
-        } 
-        else{
-            break;
-        }
-    }
-     while (1)
-    {
-        cout << "Enter the password: ";
-        cin >> password;
-        vali.length_check(password);
-        if (!vali.length_check(password)) {
-            cout << "The input is too long." << endl;
-        }
-        else {
-            break;
-        }
-    }
-
-    // ----exited validation-------
-    // string fileUsername, filePassword;
-    // ifstream fin("users.dat", ios::in);
-    // while (fin >> fileUsername >> filePassword) {
-    //         if (fileUsername == username) {
-    //                 // system("cls");
-    //                 cout << "This already exist" << endl;
-    //                 userRegister();
-    //             }
-    //         else {
-
-    //             break;
-
-    //         }
-    // }
-    // fin.close();
-
+    username = vali.input_username();
+    password = vali.input_password();
     ofstream fout("C:\\Users\\dombu\\Desktop\\Hotel-management-system\\users.dat", ios::out | ios::app);
-
     if (!fout.is_open()) {
         cerr << "Cannot open file" << endl;
         return;
     }
-
     fout << username << " " << password << endl;
     fout.close();
     cout << "User created" << endl;
-    
-    
 }
 
 
