@@ -41,10 +41,10 @@ public:
 
   void info_edit_menu() {
     cout << "==========EDIT MENU==========" << endl;
-    cout << "1.	Room" << endl;
-    cout << "2.	Name" << endl;
-    cout << "3.	Phone number" << endl;
-    cout << "4.	Hours" << endl;
+    cout << "1. Room" << endl;
+    cout << "2. Name" << endl;
+    cout << "3. Phone number" << endl;
+    cout << "4. Hours" << endl;
     cout << "5. Back" << endl;
   }
 
@@ -72,7 +72,7 @@ public:
 
   void output_title() {
     cout << "------------------------------------------------------------------\n";
-    cout << "    Roomid           Name           PhoneNumber              Hour \n";
+    cout << "    Roomid           Name            PhoneNumber              Hour \n";
     cout << "------------------------------------------------------------------\n";
   }
 
@@ -313,6 +313,7 @@ public:
           Account *target = (*it);
           output_title();
           target->output();
+          cout << endl;
           cout << "Do you want to delete this information? (y/n): ";
           char choice;
           cin >> choice;
